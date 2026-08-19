@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>theosnotbigstuff</title>
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-
 <!-- Preconnect and Fonts -->
 <link rel="preconnect" href="https://googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -16,8 +14,124 @@
     src: url('https://theosnotbigstuff.neocities.org/fonts/font.ttf') format('truetype');
 }
 /* Base Layout Rules with Background Support */
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/style.css">
+body {
+    margin: 0;
+    padding-top: 20px;
+    background-color: #0d0d0d; /* Fallback color */
+    background-image: linear-gradient(rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 0.8)), url('https://theosnotbigstuff.neocities.org/linkicons/macos-big-sur-apple-layers-fluidic-colorful-wwdc-stock-2880x1800-1455.png');
+    background-size: cover;          
+    background-repeat: no-repeat;    
+    background-position: center;     
+    background-attachment: fixed;    
+    color: #e0e0e0;
+    font-family: 'Quicksand', sans-serif;
+}
+/* Navigation Layout - Centered Vertical Box */
+.topnav {
+    width: max-content;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    background-color: rgba(30, 30, 30, 0.75); 
+    border: 1px solid rgba(42, 42, 42, 0.8);
+    border-radius: 12px;
+    backdrop-filter: blur(8px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.topnav a, .dropdown {
+    width: 200px;
+    text-align: center;
+}
+.topnav a {
+    display: block;
+    padding: 10px 5px;
+    border-radius: 6px;
+    color: #b0b0b0;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s ease-out;
+}
+/* Layout Tweaks for Clickable Buttons */
+.dropbtn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+/* Base styles for dark plain buttons */
+.topnav a:hover, .dropdown.open .dropbtn {
+    background-color: #333333;
+    color: #ffffff;
+    transform: scale(0.95);
+}
+.topnav a.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+.topnav a:active {
+    transform: scale(0.90);
+}
+/* Navigation Action & Custom Colored Buttons System */
+.topnav a.donate-btn, .dropdown-menu a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    /* Uses the unique HTML variable value, falling back to basic blue if missing */
+    background-color: var(--btn-color, #0070f3);
+    color: #ffffff;
+    font-weight: 600;
+}
+/* Hover effect for custom colored buttons (dims them slightly) */
+.topnav a.donate-btn:hover, .dropdown-menu a:hover {
+    background-color: var(--btn-color, #0070f3);
+    filter: brightness(1.2); /* Makes the custom color pop slightly brighter on hover */
+    color: #ffffff;
+}
+.donate-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
 
+hr {
+  border: none;       /* Removes the visible line */
+  margin-top: 20px;   /* Creates invisible vertical space */
+  margin-bottom: 20px;
+}
+
+
+/* Updated Dropdown UI System for Clicks */
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dropdown-content {
+    display: none; 
+    position: relative;
+    width: 100%; 
+    z-index: 1001;
+}
+/* Show menu when parent has the .open class */
+.dropdown.open .dropdown-content {
+    display: block;
+}
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin-top: 10px;
+}
+/* Content Layout Elements */
+.main-container {
+    padding: 40px 16px;
+    text-align: center;
+}
 </style>
 </head>
 <body>
