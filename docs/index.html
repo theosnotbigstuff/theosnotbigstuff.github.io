@@ -1,204 +1,214 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>theosnotbigstuff</title>
-<link rel="shortcut icon" type="image/x-icon" href="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>theosnotbigstuff</title>
+  <link rel="shortcut icon" type="image/x-icon" href="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/favicon.ico">
+  
+  <!-- Preconnect and Fonts -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com" rel="stylesheet">
+  
+  <style>
+   @font-face {
+      font-family: 'Kumbh Sans';
+      src: url('https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/font.ttf') format('truetype');
+    }
 
+    /* Base Layout Rules */
+    body {
+      margin: 0;
+      padding-top: 50px;
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Kumbh Sans', sans-serif;
+    }
 
-<!-- Preconnect and Fonts -->
-<link rel="preconnect" href="https://googleapis.com">
-<link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com" rel="stylesheet">
-<style>
-@font-face {
-    font-family: 'Quicksand';
-    src: url('https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/font.ttf') format('truetype');
-}
-/* Base Layout Rules with Background Support */
-body {
-    margin: 0;
-    padding-top: 20px;
-    background-color: #0d0d0d; /* Fallback color */
-    background-image: linear-gradient(rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 0.8)), url('https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/macos-big-sur-apple-layers-fluidic-colorful-wwdc-stock-2880x1800-1455.png');
-    background-size: cover;          
-    background-repeat: no-repeat;    
-    background-position: center;     
-    background-attachment: fixed;    
-    color: #e0e0e0;
-    font-family: 'Quicksand', sans-serif;
-}
-/* Navigation Layout - Centered Vertical Box */
-.topnav {
-    width: max-content;
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 15px 24px;
-    background-color: rgba(30, 30, 30, 0.75); 
-    border: 1px solid rgba(42, 42, 42, 0.8);
-    border-radius: 12px;
-    backdrop-filter: blur(8px); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.topnav a, .dropdown {
-    width: 200px;
-    text-align: center;
-}
-.topnav a {
-    display: block;
-    padding: 10px 5px;
-    border-radius: 6px;
-    color: #b0b0b0;
-    font-size: 14px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s, transform 0.1s ease-out;
-}
-/* Layout Tweaks for Clickable Buttons */
-.dropbtn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-}
-/* Base styles for dark plain buttons */
-.topnav a:hover, .dropdown.open .dropbtn {
-    background-color: #333333;
-    color: #ffffff;
-    transform: scale(0.95);
-}
-.topnav a.active {
-    background-color: #000000;
-    color: #ffffff;
-}
-.topnav a:active {
-    transform: scale(0.90);
-}
-/* Navigation Action & Custom Colored Buttons System */
-.topnav a.donate-btn, .dropdown-menu a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; 
-    /* Uses the unique HTML variable value, falling back to basic blue if missing */
-    background-color: var(--btn-color, #0070f3);
-    color: #ffffff;
-    font-weight: 600;
-}
-/* Hover effect for custom colored buttons (dims them slightly) */
-.topnav a.donate-btn:hover, .dropdown-menu a:hover {
-    background-color: var(--btn-color, #0070f3);
-    filter: brightness(1.2); /* Makes the custom color pop slightly brighter on hover */
-    color: #ffffff;
-}
-.donate-icon {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-}
+    /* Navigation Layout */
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 4px;
+      background-color: #1e1e1e;
+      border-bottom: 1px solid #2a2a2a;
+    }
 
-hr {
-  border: none;       /* Removes the visible line */
-  margin-top: 20px;   /* Creates invisible vertical space */
-  margin-bottom: 20px;
-}
+    .topnav::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
 
+    .topnav a, 
+    .dropdown {
+      float: left;
+      position: relative;
+    }
 
-/* Updated Dropdown UI System for Clicks */
-.dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.dropdown-content {
-    display: none; 
-    position: relative;
-    width: 100%; 
-    z-index: 1001;
-}
-/* Show menu when parent has the .open class */
-.dropdown.open .dropdown-content {
-    display: block;
-}
-.dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; 
-    margin-top: 10px;
-}
-/* Content Layout Elements */
-.main-container {
-    padding: 40px 16px;
-    text-align: center;
-}
-</style>
+    .topnav a {
+      display: block;
+      margin-right: 5px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #b0b0b0;
+      font-size: 14px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s, transform 0.1s ease-out;
+    }
+
+    .topnav a:hover, 
+    .dropdown:hover .dropbtn {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    .topnav a.active {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    .topnav a:active {
+      transform: scale(0.92);
+    }
+
+    /* Navigation Action Buttons */
+    .topnav a.donate-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #0070f3;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .topnav a.donate-btn:hover {
+      background-color: #0051b3;
+      color: #ffffff;
+    }
+
+    .donate-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      object-fit: contain;
+    }
+
+    /* Dropdown UI System */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1001;
+      padding-top: 8px;
+      min-width: 160px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-menu {
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      background-color: #1e1e1e;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .dropdown-menu a {
+      float: none;
+      display: block;
+      margin-right: 0;
+      padding: 10px 14px;
+      border-radius: 0;
+      text-align: left;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #2a2a2a;
+      color: #ffffff;
+    }
+
+    /* Content Layout Elements */
+    .main-container {
+      padding-left: 16px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Main Site Body Content -->
-<main class="main-container">
-    <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/New%20Project%20(5).png" alt="logo" width="300" height="60">
-</main>
-
-<!-- Main Navigation Bar -->
-<nav class="topnav">
-<p> Socials </p>
-    <!-- Socials Menu Dropdown Box -->
-    <div class="dropdown">
-     <div class="dropdown-menu">
-                <!-- Custom Hex Colors applied individually using standard inline style tags -->
-                <a href="https://youtube.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="--btn-color: #ff0000;">
-                    <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/youtube.png" alt="" width="20" height="20"> YouTube
-                </a>
-                <a href="https://x.com/@theosnotbigstuf" target="_blank" rel="noopener noreferrer" style="--btn-color: #1da1f2;">
-                    <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/twitter.png" alt="" width="20" height="20"> Twitter
-                </a>
-                <a href="https://tiktok.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="--btn-color: #010101;">
-                    <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/tiktok.png" alt="" class="donate-icon" width="20" height="20" style="transform: scale(1.3); margin-left: 2px;"> TikTok
-                </a>
-                <a href="https://www.instagram.com/theosnotbigstuff/" target="_blank" rel="noopener noreferrer" style="--btn-color: #e1306c;">
-                    <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/instagram.png" alt="" width="20" height="20"> Instagram
-                </a>
-                
-            </div>
-        </div>
+  <!-- Main Navigation Bar -->
+  <nav class="topnav">
+    <a class="active" href="/">Home</a>
+    
+    <!-- Socials Dropdown -->
+    <div class="dropdown"> 
+      <a class="dropbtn" href="#">Socials</a> 
+      <div class="dropdown-content"> 
+        <div class="dropdown-menu"> 
+          <a href="https://youtube.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
+            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/youtube.png" alt="" width="20" height="20"> YouTube
+          </a> 
+          <a href="https://x.com/@theosnotbigstuf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
+            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/twitter.png" alt="" width="20" height="20"> Twitter
+          </a> 
+          <a href="https://tiktok.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
+            <img src="https://theosnotbigstuff.neocities.org/linkicons/tiktok.png" alt="" class="donate-icon" width="20" height="20" style="transform: scale(1.3); margin-left: 2px;"> TikTok
+          </a> 
+          <a href="https://www.instagram.com/theosnotbigstuff/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
+            <img src="https://theosnotbigstuff.neocities.org/linkicons/instagram.png" alt="" width="20" height="20"> Instagram
+          </a> 
+        </div> 
+      </div> 
     </div>
 
+    <!-- Projects Dropdown -->
+    <div class="dropdown">
+      <a class="dropbtn" href="#">Projects</a>
+      <div class="dropdown-content">
+        <div class="dropdown-menu">
+          <a href="https://github.com/theosnotbigstuff?tab=repositories" target="_blank" rel="noopener noreferrer">All Repositories</a>
+          <a href="https://github.com/theosnotbigstuff/Taikoy">Taikoy</a>
+          <a href="https://github.com/theosnotbigstuff/My-Setup">My Setup!</a>
+        </div>
+      </div>
+    </div>
    
-    <p> Dontate </p>
+    <!-- Cool People Dropdown -->
+    <div class="dropdown">
+      <a class="dropbtn" href="#">Cool people</a>
+      <div class="dropdown-content">
+        <div class="dropdown-menu">
+          <a href="https://youtube.com/@plainnlarp124">Plainlarp124</a>
+          <a href="https://youtube.com/@aznlarpmp4">aznlarp.mp4</a>
+        </div>
+      </div>
+    </div>
+    
     <!-- Donate Button -->
-    <a class="donate-btn" href="https://paypal.me/TheoJames2" target="_blank" rel="noopener noreferrer" style="--btn-color: #0070f3;">
-        <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/new-PayPal-icon-white-png-large-size.png" alt="Donate" class="donate-icon"> PayPal
+    <a class="donate-btn" href="https://www.paypal.com/paypalme/TheoJames2" target="_blank" rel="noopener noreferrer">
+      <img src="https://theosnotbigstuff.neocities.org/linkicons/new-PayPal-icon-white-png-large-size.png" alt="Donate" class="donate-icon">
+      Donate
     </a>
-</nav>
+  </nav>
 
-<!-- JavaScript to handle safe multi-dropdown clicking -->
-<script>
-document.querySelectorAll('.dropbtn').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const parent = button.parentElement;
-        
-        document.querySelectorAll('.dropdown').forEach(drop => {
-            if (drop !== parent) drop.classList.remove('open');
-        });
-        
-        parent.classList.toggle('open');
-    });
-});
+  <!-- Main Site Body Content -->
+  <main class="main-container">
+    <h2>Welcome to my site!</h2>
+    <p>this is where my links and projects are, feel free to check it out.</p>
+  </main>
 
-window.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(drop => {
-            drop.classList.remove('open');
-        });
-    }
-});
-</script>
+</body>
+</html>
+
 
 </body>
 </html>
