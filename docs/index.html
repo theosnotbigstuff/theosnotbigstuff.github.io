@@ -2,31 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>theosnotbigstuff</title>
+ <title>theosnotbigstuff</title>
   <link rel="shortcut icon" type="image/x-icon" href="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/favicon.ico">
-  
-  
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com" rel="stylesheet">
-  
   <style>
-   @font-face {
+    @font-face {
       font-family: 'Kumbh Sans';
       src: url('https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/raw/refs/heads/main/docs/font.ttf') format('truetype');
     }
 
-   
-    body {
-      margin: 0;
-      padding-top: 50px;
-      background-color: #0d0d0d;
-      color: #e0e0e0;
-      font-family: 'Kumbh Sans', sans-serif;
+    /* --- THEME DESIGN SYSTEM (CSS VARIABLES) --- */
+    :root {
+      --bg-color: #0d0d0d;
+      --text-color: #e0e0e0;
+      --nav-link-color: #b0b0b0;
+      --nav-hover: #333333;
+      --nav-hover-text: #ffffff;
+      --active-bg: #1e1e1e;
+      --icon-invert: invert(0); 
+      /* NEW: Semi-transparent background variable for the blurred navbar */
+      --navbar-bg: rgba(13, 13, 13, 0.7); 
     }
 
-    
+    body.light-mode {
+      --bg-color: #f5f5f7;
+      --text-color: #1d1d1f;
+      --nav-link-color: #515154;
+      --nav-hover: #e8e8ed;
+      --nav-hover-text: #000000;
+      --active-bg: #e8e8ed;
+      --icon-invert: invert(1) brightness(0.2); 
+      /* NEW: Light mode semi-transparent navbar background */
+      --navbar-bg: rgba(245, 245, 247, 0.7);
+    }
+
+    body {
+      margin: 0;
+      padding-top: 60px; /* Increased slightly to account for the padded navbar */
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Kumbh Sans', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .shake-text {
+      display: block;
+      animation: rise-and-shake 1s ease-out forwards; 
+    }
+
+    .slide-left {
+      display: block;
+      opacity: 0; 
+      animation: slideInFromLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+      animation-delay: 1s; 
+    }
+
+    .main-container {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* --- NAVIGATION BAR (UPDATED FOR BLUR EFFECT) --- */
     .topnav {
       position: fixed;
       top: 0;
@@ -34,9 +69,19 @@
       z-index: 1000;
       width: 100%;
       box-sizing: border-box;
-      padding: 4px;
-      background-color: #1e1e1e;
-      border-bottom: 1px solid #2a2a2a;
+      padding: 12px 16px;
+      border: none !important;
+
+      
+      /* CHANGED: Uses the semi-transparent variable background */
+      background-color: var(--navbar-bg); 
+      
+      /* NEW: Applies the blur to elements passing beneath the bar */
+      backdrop-filter: blur(12px); 
+      -webkit-backdrop-filter: blur(12px); /* Safari support */
+      
+      /* Optional: Delicate border line underneath */
+      border-bottom: 1px solid rgba(128, 128, 128, 0.1); 
     }
 
     .topnav::after {
@@ -51,167 +96,170 @@
       position: relative;
     }
 
-    .topnav a {
+    /* --- SHARED BUTTON DESIGN (MATCHES TOPNAV & BODY) --- */
+    .topnav a, .theme-toggle-btn, .btn {
       display: block;
-      margin-right: 5px;
       padding: 8px 12px;
       border-radius: 6px;
-      color: #b0b0b0;
+      color: var(--nav-link-color);
       font-size: 14px;
       text-align: center;
       text-decoration: none;
       transition: background-color 0.3s, color 0.3s, transform 0.1s ease-out;
     }
 
+    .topnav a {
+      margin-right: 5px;
+    }
+
+    /* --- HOVER AND CLICK INTERACTIONS --- */
     .topnav a:hover, 
-    .dropdown:hover .dropbtn {
-      background-color: #333333;
-      color: #ffffff;
+    .dropdown:hover .dropbtn,
+    .theme-toggle-btn:hover,
+    .btn:hover {
+      background-color: var(--nav-hover);
+      color: var(--nav-hover-text);
+      cursor: pointer;
     }
 
     .topnav a.active {
-      background-color: #000000;
-      color: #ffffff;
+      background-color: var(--active-bg);
+      color: var(--nav-hover-text);
     }
 
-    .topnav a:active {
+    .topnav a:active, .theme-toggle-btn:active, .btn:active {
       transform: scale(0.92);
     }
 
-    
-    .topnav a.donate-btn {
+    /* --- UTILITY BUTTON ALIGNMENTS --- */
+    .topnav a.donate-btn, .btn.has-icon {
       display: inline-flex;
       align-items: center;
-      background-color: #0070f3;
-      color: #ffffff;
-      font-weight: 600;
+      gap: 6px;
     }
 
-    .topnav a.donate-btn:hover {
-      background-color: #0051b3;
-      color: #ffffff;
+    .donate-icon, .btn-icon {
+      height: 14px;
+      width: auto;
+      filter: var(--icon-invert); 
+      transition: filter 0.3s ease; 
     }
 
-    .donate-icon {
-      width: 16px;
-      height: 16px;
-      margin-right: 6px;
-      object-fit: contain;
+    .theme-toggle-btn {
+      float: right;
+      background: none;
+      border: none;
+      font-family: inherit;
     }
 
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 1001;
-      padding-top: 8px;
-      min-width: 160px;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .dropdown-menu {
-      overflow: hidden;
-      border: 1px solid #2a2a2a;
-      border-radius: 6px;
-      background-color: #1e1e1e;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-    }
-
-    .dropdown-menu a {
-      float: none;
-      display: block;
-      margin-right: 0;
-      padding: 10px 14px;
-      border-radius: 0;
-      text-align: left;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: #2a2a2a;
-      color: #ffffff;
-    }
-
-    
-    .main-container {
-      padding-left: 16px;
+    /* --- BODY BUTTONS WRAPPER GRID --- */
+    .button-container {
+      display: flex;
+      flex-direction: column; /* Stacks heading and buttons vertically */
+      align-items: center;    /* Centers everything horizontally */
+      gap: 12px;              /* Adds clean spacing between items */
       text-align: center;
+      margin-top: 32px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 1.5s; 
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      min-width: 120px; /* Optional: standardizes link sizes in the container */
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes rise-and-shake {
+      0% { transform: translateY(20px); opacity: 0; }
+      20% { transform: translateY(0) translateX(-4px); opacity: 1; }
+      30% { transform: translateY(0) translateX(4px); }
+      40% { transform: translateY(0) translateX(-4px); }
+      50% { transform: translateY(0) translateX(4px); }
+      60% { transform: translateY(0) translateX(-3px); }
+      70% { transform: translateY(0) translateX(3px); }
+      80% { transform: translateY(0) translateX(-2px); }
+      90% { transform: translateY(0) translateX(2px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    @keyframes slideInFromLeft {
+      0% { transform: translateX(-50px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-
-  <nav class="topnav">
-    <a class="active" href="/">Home</a>
-    
-   
-    <div class="dropdown"> 
-      <a class="dropbtn" href="#">Socials</a> 
-      <div class="dropdown-content"> 
-        <div class="dropdown-menu"> 
-          <a href="https://tiktok.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
-            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/tiktok.png" alt="" class="donate-icon" width="20" height="20" style="transform: scale(1.3); margin-left: 2px;"> TikTok
-            </a> 
-           
-            <a href="https://www.instagram.com/theosnotbigstuff/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
-            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/instagram.png" alt="" width="20" height="20"> Instagram
-            </a> 
-            
-           <a href="https://x.com/@theosnotbigstuf" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
-            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/twitter.png" alt="" width="20" height="20"> Twitter
-          </a> 
-          
-          <a href="https://youtube.com/@theosnotbigstuff" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px;"> 
-            <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/youtube.png" alt="" width="20" height="20"> YouTube
-          </a> 
-          
-        </div> 
-      </div> 
-    </div>
-
-    <div class="dropdown">
-      <a class="dropbtn" href="#">Projects</a>
-      <div class="dropdown-content">
-        <div class="dropdown-menu">
-          <a href="https://github.com/theosnotbigstuff?tab=repositories" target="_blank" rel="noopener noreferrer">All Repositories</a>
-          <a href="https://github.com/theosnotbigstuff/TurboTaiko">TurboTaiko</a>
-          <a href="https://github.com/theosnotbigstuff/My-Setup">My Setup!</a>
-        </div>
-      </div>
-    </div>
-   
-
-    <div class="dropdown">
-      <a class="dropbtn" href="#">Cool people</a>
-      <div class="dropdown-content">
-        <div class="dropdown-menu">
-          <a href="https://youtube.com/@plainnlarp124">Plainlarp124</a>
-          <a href="https://youtube.com/@aznlarpmp4">aznlarp.mp4</a>
-        </div>
-      </div>
-    </div>
-    
-
+  <div class="topnav">
+    <a href="#" class="active">Home</a>
     <a class="donate-btn" href="https://www.paypal.com/paypalme/TheoJames2" target="_blank" rel="noopener noreferrer">
       <img src="https://raw.githubusercontent.com/theosnotbigstuff/theosnotbigstuff.github.io/refs/heads/main/docs/linkicons/paypal.png" alt="Donate" class="donate-icon">
       Donate
     </a>
-  </nav>
+    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">☀️ Light Mode</button>
+  </div>
 
+  <div class="main-container">
+    <div class="shake-box">
+      <h1 class="shake-text">Welcome! 👋<br></h1>
+      <h3 class="slide-left">This is my website, I have some things linked below so check them out!</h3>
+    </div>
 
-  <main class="main-container">
-    <h2>Welcome to my site!</h2>
-    <p>this is where my links and projects are, feel free to check it out.</p>
-  </main>
+    <div class="button-container">
+      <h3>Socials</h3>
+      <a href="https://tiktok.com/@theosnotbigstuff" class="btn" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a href="https://www.instagram.com/theosnotbigstuff/" class="btn" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://x.com/@theosnotbigstuf" class="btn" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <a href="https://youtube.com/@theosnotbigstuff" class="btn" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
+
+    <div class="button-container"> 
+      <h3>Projects</h3> 
+      <a href="https://github.com/theosnotbigstuff?tab=repositories" class="btn" target="_blank" rel="noopener noreferrer">All repo's</a> 
+      <a href="https://github.com/theosnotbigstuff/TurboTaiko" class="btn" target="_blank" rel="noopener noreferrer">TurboTaiko</a> 
+      <a href="https://github.com/theosnotbigstuff/My-Setup" class="btn" target="_blank" rel="noopener noreferrer">My Setup</a> 
+      
+       <div class="button-container">
+      <h3>Cool dudes</h3>
+      <a href="https://youtube.com/@plainnlarp124" class="btn" target="_blank" rel="noopener noreferrer">plainlarp124</a>
+      <a href="https://youtube.com/@aznlarpmp4" class="btn" target="_blank" rel="noopener noreferrer">aznlarp.mp4</a>
+      
+    </div>
+    <br />
+    
+    </div>
+  </div>
+
+  <script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggleBtn.textContent = '🌙 Dark Mode';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      let theme = 'dark';
+      if (document.body.classList.contains('light-mode')) {
+        theme = 'light';
+        themeToggleBtn.textContent = '🌙 Dark Mode';
+      } else {
+        themeToggleBtn.textContent = '☀️ Light Mode';
+      }
+      
+      localStorage.setItem('theme', theme);
+    });
+  </script>
 
 </body>
 </html>
 
-
-</body>
-</html>
