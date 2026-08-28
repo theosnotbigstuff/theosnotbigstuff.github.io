@@ -431,7 +431,7 @@
 
     if (currentTheme === 'light') {
       document.body.classList.add('light-mode');
-      themeToggleBtn.textContent = '🌙 Dark Mode';
+      themeToggleBtn.textContent = '🌙';
     }
 
     themeToggleBtn.addEventListener('click', () => {
@@ -440,9 +440,9 @@
       let theme = 'dark';
       if (document.body.classList.contains('light-mode')) {
         theme = 'light';
-        themeToggleBtn.textContent = '🌙 Dark Mode';
+        themeToggleBtn.textContent = '🌙';
       } else {
-        themeToggleBtn.textContent = '☀️ Light Mode';
+        themeToggleBtn.textContent = '☀️';
       }
       
       localStorage.setItem('theme', theme);
