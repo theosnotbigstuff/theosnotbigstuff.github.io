@@ -12,7 +12,8 @@
     }
     
 
-    /* --- THEME DESIGN SYSTEM (CSS VARIABLES) --- */
+
+
     :root {
       --bg-color: #0d0d0d;
       --text-color: #e0e0e0;
@@ -63,7 +64,7 @@
       text-align: center;
     }
 
-    /* --- NAVIGATION BAR (UPDATED FOR BLUR EFFECT) --- */
+
     .topnav {
       position: fixed;
       top: 0;
@@ -75,12 +76,12 @@
       border: none !important;
 
       
-      /* CHANGED: Uses the semi-transparent variable background */
+
       background-color: var(--navbar-bg); 
       
-      /* NEW: Applies the blur to elements passing beneath the bar */
+
       backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px); /* Safari support */
+      -webkit-backdrop-filter: blur(12px); 
       
       /* Optional: Delicate border line underneath */
       border-bottom: 1px solid rgba(128, 128, 128, 0.1); 
@@ -98,7 +99,7 @@
       position: relative;
     }
 
-    /* --- SHARED BUTTON DESIGN (MATCHES TOPNAV & BODY) --- */
+
     .topnav a, .theme-toggle-btn, .btn {
       display: block;
       padding: 8px 12px;
@@ -114,7 +115,7 @@
       margin-right: 5px;
     }
 
-    /* --- HOVER AND CLICK INTERACTIONS --- */
+
     .topnav a:hover, 
     .dropdown:hover .dropbtn,
     .theme-toggle-btn:hover,
@@ -154,42 +155,42 @@
       font-family: inherit;
     }
 
- /* --- BODY BUTTONS WRAPPER GRID --- */
 
-/* 1. This container now handles stacking your rows vertically */
+
+
 .button-container {
   display: flex;
-  flex-direction: column;    /* Stacks rows vertically so they never collide */
-  gap: 20px;                 /* Clean vertical spacing between rows */
+  flex-direction: column;    
+  gap: 20px;                
   margin-top: 32px;
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
   animation-delay: 1.5s; 
 }
 
-/* 2. NEW ROW CLASS: Put this on each distinct category line */
+
 .button-row {
   display: flex;
-  flex-direction: row;       /* Keeps label and its buttons horizontal */
-  align-items: center;       /* Vertically aligns text with buttons */
-  gap: 16px;                 /* Gap between the red text and the buttons */
-  flex-wrap: wrap;           /* Safely wraps to a new line on small screens */
-  color: #ff6347;            /* Sets your tomato color for labels */
+  flex-direction: row;      
+  align-items: center;     
+  gap: 16px;              
+  flex-wrap: wrap;         
+  color: #ff6347;           
   font-weight: bold;
 }
 
-/* 3. NEW GROUP CLASS: Keeps the buttons grouped together tightly */
+
 .btn-group {
   display: flex;
   flex-direction: row;
-  gap: 12px;                 /* Spacing between individual buttons */
+  gap: 12px;                
 }
 
-/* --- BODY BUTTONS WRAPPER GRID --- */
+
 .button-container {
   display: flex;
   flex-direction: column;    
-  align-items: center;       /* ⭐ CENTER ALL ROWS ON THE SCREEN */
+  align-items: center;    
   gap: 20px;                 
   margin-top: 32px;
   opacity: 0;
@@ -201,7 +202,7 @@
   display: flex;
   flex-direction: row;       
   align-items: center;       
-  justify-content: center;   /* ⭐ CENTERS LABEL AND BUTTON GROUP TOGETHER */
+  justify-content: center; 
   gap: 16px;                 
   flex-wrap: wrap;           
   color: #ff6347;            
@@ -210,24 +211,27 @@
 
 
 
-/* Your button styles (Kept exactly as you had them) */
+
 .btn {
-  display: inline-block;
+  display: inline-flex;   
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
   min-width: 40px; 
-  text-align: center;        /* Centered button text */
-  background-color: #000000; 
-  color: #ffffff;            
+  text-align: center;       
   padding: 10px 20px;        
   border-radius: 6px;        
-  transition: background-color 0.3s ease; 
+  background-color: var(--active-bg); 
+  color: var(--nav-hover-text);         
 }
 
-/* Added hover state */
-.btn:hover {
-  background-color: color: #ff6347; /* Shifts black to dark gray on hover */
+/* Target PNG elements tucked inside buttons */
+.btn-icon {
+  height: 14px;
+  width: auto;
+  filter: var(--icon-invert);
+  transition: filter 0.3s ease;
 }
-
 
 
     @keyframes fadeIn {
@@ -252,36 +256,36 @@
       100% { transform: translateX(0); opacity: 1; }
     }
 
-    /* Stacks each distinct category row vertically */
+
 .profile-container {
     display: flex;
     flex-direction: column;
-    gap: 24px; /* Space between each category row */
+    gap: 24px; 
     padding: 20px;
 }
     
 
-/* Controls the horizontal layout of a title + its buttons */
+
 .section-row {
     display: flex;
     flex-direction: row;
-    align-items: center; /* Centers title vertically with the buttons */
-    gap: 16px;          /* Space between the red title and the first button */
-    flex-wrap: wrap;     /* Safe wrap for small mobile viewports */
+    align-items: center
+    gap: 16px;      
+    flex-wrap: wrap;   
 }
 
-/* Keeps the button group items packed tightly side-by-side */
+
 .button-group {
     display: flex;
     flex-direction: row;
-    gap: 12px;          /* Space between individual black buttons */
+    gap: 12px;       
 }
 
-/* Styled to match your exact screenshot rules */
+
 .section-title {
-    color: #ff6b57;     /* Coral / Salmon red text color */
+    color: #ff6b57;    
     font-weight: bold;
-    min-width: 80px;    /* Optional: Aligns button columns cleanly */
+    min-width: 80px;  
 }
 
 .filled-button {
@@ -289,83 +293,7 @@
     background-color: #000000; /* Black background */
     color: #ffffff;            /* White text */
     padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
 }
-@media (max-width: 600px) {
-  /* ... previous styles ... */
-
-  .btn {
-    padding: 12px 20px;
-    font-size: 15px;
-    width: 100%;             /* ⭐ Forces buttons to stretch wide and stack neatly */
-    max-width: 280px;        /* Optional: stops buttons from stretching too wide on tablet sizes */
-    box-sizing: border-box;  /* Ensures padding doesn't break the width */
-  }
-}
-
-/* --- MOBILE RESPONSIVE STYLES --- */
-@media (max-width: 600px) {
-  
-  /* 1. Stack the layout row elements vertically */
-  .button-row {
-    flex-direction: column; 
-    align-items: center;    /* Center the label on mobile */
-    gap: 8px;               /* Reduce gap between label and buttons */
-  }
-
-  /* 2. Wrap buttons to a new line cleanly if they run out of space */
-  .btn-group {
-    justify-content: center; /* Centers buttons horizontally */
-    flex-wrap: wrap;        /* Allows buttons to drop to row 2 instead of cutting off */
-    gap: 8px;               /* Tighter spacing for smaller mobile screens */
-    width: 100%;            /* Lets the group use full screen width */
-  }
-
-  /* 3. Slightly scale down padding so buttons aren't too bulky on tiny phones */
-  .btn {
-    padding: 8px 16px;
-    font-size: 14px;
-    width: max-content;     /* Keeps them fitting neatly around text */
-  }
-}
- /* --- 📱 MOBILE SPECIFIC OVERRIDES (Screens 600px or smaller) --- */
-    @media (max-width: 600px) {
-      body {
-        padding: 24px 16px; /* Tighter margins on small mobile screens */
-      }
-
-      .welcome-container h1 {
-        font-size: 2rem; /* Shrinks the text slightly so it doesn't break headers weirdly */
-      }
-
-      .button-row {
-        flex-direction: column; /* 🔄 Shifts from horizontal row to a vertical stack */
-        align-items: center;    /* Centers the label above the buttons */
-        gap: 8px;
-      }
-
-      .row-label {
-        text-align: center;     /* Centers text label on mobile screens */
-        min-width: 100%;        /* Forces it to take up its own line block */
-      }
-
-      .btn-group {
-        justify-content: center; /* Centers the cluster of buttons */
-        width: 100%;
-        gap: 8px;                /* Closer spacing for small phone widths */
-      }
-      
-      /* Optional adjustment if you want buttons slightly larger for thumb taps on mobile: */
-      .btn {
-        padding: 12px 18px;
-        font-size: 15px;
-      }
-    }
-
-
-    }
   </style>
 </head>
 <body>
@@ -394,10 +322,20 @@
   <!-- Socials Row -->
   <div class="button-row">
       <div class="btn-group">
-      <a href="https://tiktok.com/@theosnotbigstuff" class="btn">TikTok</a>
-      <a href="https://www.instagram.com/theosnotbigstuff/" class="btn">Instagram</a>
-      <a href="https://x.com/@theosnotbigstuf" class="btn">Twitter</a>
-      <a href="https://youtube.com/@theosnotbigstuff" class="btn">YouTube</a>
+      
+        <a href="https://tiktok.com/@theosnotbigstuff" class="btn">
+            <img src="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/blob/main/docs/linkicons/tiktok.png?raw=true" alt="" class="btn-icon">TikTok </a>
+
+        <a href="https://www.instagram.com/theosnotbigstuff/" class="btn">
+            <img src="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/blob/main/docs/linkicons/instagram.png?raw=true" alt="" class="btn-icon">Instagram </a>
+      
+        <a href="https://x.com/@theosnotbigstuf" class="btn">
+            <img src="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/blob/main/docs/linkicons/twitter.png?raw=true" alt="" class="btn-icon">Twitter </a>  
+            
+         <a href="https://youtube.com/@theosnotbigstuff" class="btn">
+            <img src="https://github.com/theosnotbigstuff/theosnotbigstuff.github.io/blob/main/docs/linkicons/youtube.png?raw=true" alt="" class="btn-icon">YouTube </a>  
+
+
     </div>
   </div>
 <p style=" font-weight:800" >Projects</p>
